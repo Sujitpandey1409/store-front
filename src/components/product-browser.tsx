@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ProductGrid } from "@/components/product-grid";
 import { categories, type Product } from "@/lib/products";
 
@@ -9,6 +9,10 @@ export function ProductBrowser({ initialCategory, products }: { initialCategory?
   const [category, setCategory] = useState<string>(chosenCategory ?? "All");
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("featured");
+
+  useEffect(() => {
+    setCategory(chosenCategory ?? "All");
+  }, [chosenCategory]);
 
   const visibleProducts = useMemo(() => {
     const query = search.trim().toLowerCase();
